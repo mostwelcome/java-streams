@@ -18,7 +18,7 @@ public class Filtering {
     public void filter() throws Exception {
         List<Car> cars = MockData.getCars();
         List<Car> carsLessThan20k = cars.stream().filter(car -> car.getPrice() < 20_000.00).filter(car -> car.getColor().equalsIgnoreCase("Yellow")).
-        collect(Collectors.toList());
+                collect(Collectors.toList());
 
         carsLessThan20k.forEach(System.out::println);
 
@@ -47,21 +47,29 @@ public class Filtering {
     @Test
     public void findFirst() throws Exception {
         int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int i = Arrays.stream(numbers).filter(n -> n == 50).findFirst().orElse(-1);
+        System.out.println(i);
     }
 
     @Test
     public void findAny() throws Exception {
         int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10};
+        int i = Arrays.stream(numbers).filter(n -> n == 9).findAny().orElse(-1);
+        System.out.println(i);
     }
 
     @Test
     public void allMatch() throws Exception {
         int[] even = {2, 4, 6, 8, 10};
+        boolean b = Arrays.stream(even).allMatch(n -> n % 2 == 0);
+        System.out.println(b);
     }
 
     @Test
     public void anyMatch() throws Exception {
-        int[] evenAndOneOdd = {2, 4, 6, 8, 10, 11};
+        int[] evenAndOneOdd = {2, 4, 6, 8, 10};
+        boolean b = Arrays.stream(evenAndOneOdd).anyMatch(n -> (n % 2 != 0));
+        System.out.println(b);
     }
 
 }

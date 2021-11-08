@@ -9,10 +9,13 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TransformationsMapAndReduce {
 
@@ -47,6 +50,9 @@ public class TransformationsMapAndReduce {
     @Test
     void mapToDoubleAndFindAverageCarPrice() throws IOException {
         List<Car> cars = MockData.getCars();
+        double avg = cars.stream().mapToDouble(Car::getPrice).average().orElse(0);
+        assertEquals(avg,52693.19979);
+        System.out.println(avg);
     }
 
     @Test
